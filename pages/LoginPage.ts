@@ -21,9 +21,12 @@ export class LoginPage {
     await this.page.goto('/');
   }
 
-  async login(username: string, password: string = process.env.PASSWORD!) {
+  async fillCredentials(username: string, password: string = process.env.PASSWORD!) {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
+  }
+
+  async submitLogin() {
     await this.loginButton.click();
   }
 }

@@ -18,7 +18,7 @@
   "homepage": "https://github.com/samuelventurava-dot/qa-automation-saucedemo#readme",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^26.6.1"
+    "@types/node": "^26.6.2"
   },
   "dependencies": {
     "dotenv": "^18.0.0"
