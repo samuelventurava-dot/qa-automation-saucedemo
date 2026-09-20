@@ -35,9 +35,12 @@ jobs:
     - name: Ejecutar pruebas automatizadas
       run: npx playwright test
       env:
+        BASE_URL: https://www.saucedemo.com
         # Se pueden usar datos no sensibles a preferencia
         STANDARD_USER: ${{ secrets.STANDARD_USER }}
+        LOCKED_USER: ${{ secrets.LOCKED_USER }}
         PASSWORD: ${{ secrets.PASSWORD }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         # Se puede usar SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Subir reporte HTML como artefacto
