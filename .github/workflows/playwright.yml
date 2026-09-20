@@ -26,10 +26,14 @@ jobs:
         node-version: 20
         cache: 'npm'
 
-    - name: Instalar dependencias
+    - name: 📦 Instalar dependencias
       run: npm ci
 
-    - name: Ejecutar pruebas automatizadas
+    # AGREGAR ESTE PASO:
+    - name: 🌐 Instalar Navegadores de Playwright
+      run: npx playwright install chromium --with-deps
+
+    - name: 🚀 Ejecutar pruebas automatizadas
       run: npx playwright test
       env:
         # Se pueden usar datos no sensibles a preferencia
@@ -44,3 +48,11 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 15
+
+    - name: 📧 Enviar Reporte por Correo
+      if: always() 
+      run: npx tsx utils/mailer.ts
+      env:
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}

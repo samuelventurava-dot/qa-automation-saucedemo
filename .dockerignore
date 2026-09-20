@@ -16,3 +16,6 @@
 # Archivos de configuración de Mac
 .DS_Store
 Thumbs.db
+
+#Reportes
+.zip

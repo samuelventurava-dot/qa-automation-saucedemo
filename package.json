@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "send-email": "npx tsx utils/mailer.ts",
+    "test:full": "playwright test || true && npm run send-email"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/samuelventurava-dot/qa-automation-saucedemo.git"
@@ -18,9 +22,13 @@
   "homepage": "https://github.com/samuelventurava-dot/qa-automation-saucedemo#readme",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^26.6.2"
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^26.6.2",
+    "@types/nodemailer": "^8.0.2"
   },
   "dependencies": {
-    "dotenv": "^18.0.0"
+    "adm-zip": "^0.6.1",
+    "dotenv": "^18.0.0",
+    "nodemailer": "^10.0.10"
   }
 }
