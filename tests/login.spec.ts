@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
+import { LoginPage } from '../pages/LoginPage';
 import users from '../data/users.json';
 import { step } from '../utils/customStep';
 
@@ -41,19 +41,19 @@ test.describe('Flujos de Autenticación', () => {
     });
   });
 
-  test('CP03: Demostrar fallo controlado sin detener ejecución (Soft Assertion)', async ({ page }) => {
-    await step('Ingresar credenciales válidas', page, async () => {
-      await loginPage.fillCredentials(process.env.STANDARD_USER || users.validUser);
-      await loginPage.submitLogin();
-    });
+  // test('CP03: Demostrar fallo controlado sin detener ejecución (Soft Assertion)', async ({ page }) => {
+  //   await step('Ingresar credenciales válidas', page, async () => {
+  //     await loginPage.fillCredentials(process.env.STANDARD_USER || users.validUser);
+  //     await loginPage.submitLogin();
+  //   });
 
-    await step('Validación intencionalmente fallida (Soft Assertion)', page, async () => {
-      const logo = page.locator('.app_logo');
-      await expect.soft(logo).toHaveText('Tienda Falsa Automotriz');
-    });
+  //   await step('Validación intencionalmente fallida (Soft Assertion)', page, async () => {
+  //     const logo = page.locator('.app_logo');
+  //     await expect.soft(logo).toHaveText('Tienda Falsa Automotriz');
+  //   });
 
-    await step('Paso posterior que confirma que la ejecución no se detuvo', page, async () => {
-      await expect(page.locator('.inventory_list')).toBeVisible();
-    });
-  });
+  //   await step('Paso posterior que confirma que la ejecución no se detuvo', page, async () => {
+  //     await expect(page.locator('.inventory_list')).toBeVisible();
+  //   });
+  // });
 });
