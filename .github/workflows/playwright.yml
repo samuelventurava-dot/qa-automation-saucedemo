@@ -26,19 +26,18 @@ jobs:
         node-version: 20
         cache: 'npm'
 
-    - name: 📦 Instalar dependencias
+    - name: Instalar dependencias
       run: npm ci
 
-    # AGREGAR ESTE PASO:
-    - name: 🌐 Instalar Navegadores de Playwright
+    - name: Instalar Navegadores de Playwright
       run: npx playwright install chromium --with-deps
 
-    - name: 🚀 Ejecutar pruebas automatizadas
+    - name: Ejecutar pruebas automatizadas
       run: npx playwright test
       env:
         # Se pueden usar datos no sensibles a preferencia
-        STANDARD_USER: standard_user
-        PASSWORD: secret_sauce
+        STANDARD_USER: ${{ secrets.STANDARD_USER }}
+        PASSWORD: ${{ secrets.PASSWORD }}
         # Se puede usar SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Subir reporte HTML como artefacto
@@ -49,7 +48,7 @@ jobs:
         path: playwright-report/
         retention-days: 15
 
-    - name: 📧 Enviar Reporte por Correo
+    - name: Enviar Reporte por Correo
       if: always() 
       run: npx tsx utils/mailer.ts
       env:
