@@ -11,10 +11,6 @@ export class CartPage {
     this.cartItems = page.locator('.cart_item');
   }
 
-  async getCartItemsCount(): Promise<number> {
-    return await this.cartItems.count();
-  }
-
   async proceedToCheckout() {
     await this.checkoutButton.click();
   }

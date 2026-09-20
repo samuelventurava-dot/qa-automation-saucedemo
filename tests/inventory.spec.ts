@@ -33,8 +33,7 @@ test.describe('Flujos de Inventario y Carrito', () => {
 
     await step('Navegar al carrito y validar items añadidos',page, async () => {
       await inventoryPage.goToCart();
-      const itemsInCart = await cartPage.getCartItemsCount();
-      expect(itemsInCart).toBe(products.length);
+      await expect(cartPage.cartItems).toHaveCount(products.length);
     });
   });
 

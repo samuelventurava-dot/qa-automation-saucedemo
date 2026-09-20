@@ -1,0 +1,18 @@
+# Dependencias y archivos de sistema operativo
+/node_modules
+/playwright-report
+/test-results
+/test-results-each
+/test-results.*
+
+# Archivos de entorno y secretos
+.env
+.env.*
+
+# Control de versiones
+.git
+.gitignore
+
+# Archivos de configuración de Mac
+.DS_Store
+Thumbs.db

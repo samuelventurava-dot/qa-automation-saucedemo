@@ -1,27 +1,46 @@
-name: Playwright Tests
+name: Playwright E2E Tests
+
+# 1. Triggers: Cuándo se ejecutará el pipeline
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+
 jobs:
-  test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
+    # 2. Ejecutar directamente dentro del contenedor de Playwright
+    container:
+      image: mcr.microsoft.com/playwright:v1.44.0-jammy
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Descargar código fuente
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: lts/*
-    - name: Install dependencies
+        node-version: 20
+        cache: 'npm'
+
+    - name: Instalar dependencias
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
+
+    - name: Ejecutar pruebas automatizadas
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+      env:
+        # Se pueden usar datos no sensibles a preferencia
+        STANDARD_USER: standard_user
+        PASSWORD: secret_sauce
+        # Se puede usar SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Subir reporte HTML como artefacto
+      uses: actions/upload-artifact@v4
+      if: always() # Se garantiza que se suba el reporte aunque las pruebas fallen
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 15
