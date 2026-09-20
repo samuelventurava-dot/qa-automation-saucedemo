@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  qa-framework:
+    build: .
+    image: qa-saucedemo-framework
+    # Docker Compose lee e inyecta el .env nativamente y sin errores de formato
+    env_file:
+      - .env
+    # Mapeo de volúmenes simplificado con rutas relativas
+    volumes:
+      - ./playwright-report:/app/playwright-report
+    # El comando que ejecutará al levantar el contenedor
+    command: npm run test:full

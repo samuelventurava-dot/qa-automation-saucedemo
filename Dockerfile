@@ -1,6 +1,6 @@
 # 1. Imagen oficial de Playwright
 # Contiene Node.js y todas las dependencias de SO para Chromium, Firefox y WebKit
-FROM mcr.microsoft.com/playwright:v1.44.0-jammy
+FROM mcr.microsoft.com/playwright:v1.63.0-jammy
 
 # 2. Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -15,4 +15,4 @@ RUN npm ci
 COPY . .
 
 # 6. Comando por defecto que se ejecutará al levantar el contenedor
-CMD ["npx", "playwright", "test"]
+CMD ["npm", "run", "test:full"]
