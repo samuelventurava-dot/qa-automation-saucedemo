@@ -11,6 +11,8 @@ jobs:
   e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    environment: PruebaTecnicaQA
     
     # 2. Ejecutar directamente dentro del contenedor de Playwright
     container:
